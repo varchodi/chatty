@@ -7,7 +7,7 @@ export default function RootLayout() {
         headerShown:false
       }} />
       <Stack.Screen name='login' options={{
-        
+        presentation:'modal'
       }}/>
     </Stack>
   );
