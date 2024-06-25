@@ -1,3 +1,4 @@
+import BottomLoginSheet from "@/components/BottomSheet/BottomLoginSheet";
 import AnimatedIntro from "@/components/intro/AnimatedIntro";
 import { Text, View } from "react-native";
 
@@ -8,7 +9,8 @@ export default function Index() {
         flex: 1,
       }}
     >
-      <AnimatedIntro/>
+      <AnimatedIntro />
+      <BottomLoginSheet/>
     </View>
   );
 }
