@@ -145,31 +145,31 @@ const AnimatedIntro = () => {
         [labelWidth, currentX, half]
       );
 
-    useAnimatedReaction(
-        () => canGoToNext.value,
-        (next) => {
-          if (next) {
-            canGoToNext.value = false;
-            currentX.value = withDelay(
-              1000,
-              withTiming(
-                half,
-                {
-                  duration: 800,
-                },
-                (finished) => {
-                  if (finished) {
-                    currentIndex.value = (currentIndex.value + 1) % content.length;
-                    isAtStart.value = true;
-                    didPlay.value = false;
-                  }
-                }
-              )
-            );
-          }
-        },
-        [currentX, labelWidth]
-      );
+    // useAnimatedReaction(
+    //     () => canGoToNext.value,
+    //     (next) => {
+    //       if (next) {
+    //         canGoToNext.value = false;
+    //         currentX.value = withDelay(
+    //           1000,
+    //           withTiming(
+    //             half,
+    //             {
+    //               duration: 800,
+    //             },
+    //             (finished) => {
+    //               if (finished) {
+    //                 currentIndex.value = (currentIndex.value + 1) % content.length;
+    //                 isAtStart.value = true;
+    //                 didPlay.value = false;
+    //               }
+    //             }
+    //           )
+    //         );
+    //       }
+    //     },
+    //     [currentX, labelWidth]
+    //   );
 
     // End reactions
 
