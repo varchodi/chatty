@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ActivityIndicator, KeyboardAvoidingView, Platform, StyleSheet, Text, View ,Image, TextInput} from 'react-native'
+import { ActivityIndicator, KeyboardAvoidingView, Platform, StyleSheet, Text, View ,Image, TextInput, Alert} from 'react-native'
 import { useLocalSearchParams } from 'expo-router'
 import { defaultStyles } from '@/constants/styles';
 import Colors from '@/constants/Colors';
@@ -16,8 +16,40 @@ const Page = () => {
     const { signUp, isLoaded, setActive } = useSignUp();
     const { signIn, isLoaded: singnUpLoaded, setActive:signUpSetActive } = useSignIn();
 
-    const onSignUpPress = async () => {console.log({emailAddress,password}) };
-    const onSignInPress = async () => { };
+    const onSignUpPress = async () => {
+        if (!singnUpLoaded) return;
+        setLoding(true);
+
+        try {
+            // create user with email n pass 
+            const result = await signUp?.create({ emailAddress, password });
+            signUpSetActive({
+                session: result?.createdSessionId
+            });
+        } catch (err:any) {
+            console.log(`onSignUppress - error:\n${err}`);
+            Alert.alert(err.errors[0].message)
+        } finally {
+            setLoding(false);
+        }
+     };
+    const onSignInPress = async () => { 
+        if (!isLoaded) return;
+        setLoding(true);
+
+        try {
+            // create user with email n pass 
+            const result = await signIn?.create({ identifier:emailAddress, password });
+            setActive({
+                session: result?.createdSessionId
+            });
+        } catch (err:any) {
+            console.log(`onSignInpress - error:\n${err}`);
+            Alert.alert(err.errors[0].message)
+        }finally {
+            setLoding(false);
+        }
+    };
 
   return (
       <KeyboardAvoidingView 
