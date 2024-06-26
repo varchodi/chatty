@@ -1,6 +1,6 @@
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
-import { Slot, SplashScreen, Stack, useRouter } from "expo-router";
+import { Slot, SplashScreen, Stack, useRouter, useSegments } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as SecureStore from 'expo-secure-store'
@@ -30,6 +30,11 @@ const tokenCache = {
 SplashScreen.preventAutoHideAsync()
 
 function InitialLayout() {
+  const router = useRouter();
+  // cleck stuff
+  const { isLoaded, isSignedIn } = useAuth();
+  const segments = useSegments()
+
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   })
@@ -42,10 +47,12 @@ function InitialLayout() {
     if (loaded) SplashScreen.hideAsync();
   },[loaded])
 
-  const router = useRouter();
-  // cleck stuff
-  const { isLoaded, isSignedIn } = useAuth();
-  // const segments
+  useEffect(() => {
+    if (!isLoaded) return;
+    const segment = segments[0];
+    console.log(`effect - segment : ${segment}`)
+  },[isSignedIn])
+
   if (!loaded || !isLoaded) return <Slot/>
   return (
     <Stack>
