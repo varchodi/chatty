@@ -1,7 +1,7 @@
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { Slot, SplashScreen, Stack, useRouter, useSegments } from "expo-router";
-import { TouchableOpacity } from "react-native";
+import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as SecureStore from 'expo-secure-store'
 import { useFonts } from "expo-font";
@@ -50,9 +50,6 @@ function InitialLayout() {
   useEffect(() => {
     if (!isLoaded) return;
     const inAuthGroup = segments[0] === '(auth)';
-    
-    console.log(`usereffect - inauthGroup: ${inAuthGroup}`);
-    console.log(`usereffect - isSignedIn: ${isSignedIn}`);
 
     if (isSignedIn && !inAuthGroup) {
       // bring user inside 
@@ -63,7 +60,9 @@ function InitialLayout() {
     }
   },[isSignedIn])
 
-  if (!loaded || !isLoaded) return <Slot/>
+  if (!loaded || !isLoaded) return <View style={{ flex: 1 ,alignItems:'center',justifyContent:'center'}} >
+    <ActivityIndicator size={'large'} color={'#000'} />
+  </View>
   return (
     <Stack>
       <Stack.Screen name="index" options={{
@@ -77,7 +76,11 @@ function InitialLayout() {
             <Ionicons name="close-outline" size={28} />
           </TouchableOpacity>
         )
-      }}/>
+      }} />
+      <Stack.Screen
+        name="(auth)"
+        options={{headerShown:false}}
+      />
     </Stack>
   );
 }
