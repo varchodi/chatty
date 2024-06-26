@@ -49,8 +49,18 @@ function InitialLayout() {
 
   useEffect(() => {
     if (!isLoaded) return;
-    const segment = segments[0];
-    console.log(`effect - segment : ${segment}`)
+    const inAuthGroup = segments[0] === '(auth)';
+    
+    console.log(`usereffect - inauthGroup: ${inAuthGroup}`);
+    console.log(`usereffect - isSignedIn: ${isSignedIn}`);
+
+    if (isSignedIn && !inAuthGroup) {
+      // bring user inside 
+      router.replace('/(auth)/')
+    } else if (!isSignedIn && inAuthGroup) {
+      // kick user out
+      router.replace('/');
+    }
   },[isSignedIn])
 
   if (!loaded || !isLoaded) return <Slot/>

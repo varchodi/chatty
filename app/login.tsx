@@ -4,12 +4,17 @@ import { useLocalSearchParams } from 'expo-router'
 import { defaultStyles } from '@/constants/styles';
 import Colors from '@/constants/Colors';
 import { TouchableOpacity } from 'react-native';
+import { useSignIn, useSignUp } from '@clerk/clerk-expo';
 
 const Page = () => {
     const { type } = useLocalSearchParams<{ type: string }>();
     const [loding, setLoding] = useState(false);
     const [emailAddress, setEmailAddress] = useState("cool@green.com");
     const [password, setPassword] = useState('');
+
+    // clerk
+    const { signUp, isLoaded, setActive } = useSignUp();
+    const { signIn, isLoaded: singnUpLoaded, setActive:signUpSetActive } = useSignIn();
 
     const onSignUpPress = async () => {console.log({emailAddress,password}) };
     const onSignInPress = async () => { };
