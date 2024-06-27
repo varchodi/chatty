@@ -24,6 +24,19 @@ export const CustomDrawerContent = (props: any) => {
         {...props}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
+
+      <View style={{padding:16,paddingBottom:bottom+10}}>
+        <Link href='/(auth)/(modal)/settings' asChild>
+          <TouchableOpacity style={styles.footer} >
+            <Image 
+              source={{ uri: 'https://w0.peakpx.com/wallpaper/358/424/HD-wallpaper-anbu-mask-naruto-naruto-anime-digital-art-artist-artwork.jpg' }}
+              style={styles.avatar}
+            />
+            <Text style={styles.userName}>Green Varch</Text>
+            <Ionicons name='ellipsis-horizontal' size={24} color={Colors.greyLight}/>
+          </TouchableOpacity>
+        </Link>
+      </View>
     </View>
   )
 }
@@ -139,5 +152,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color:'#424242'
   },
+  footer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap:12,
+  },
+  avatar:{
+    width: 40,
+    height: 40,
+    borderRadius:10,
+  },
+  userName: {
+    fontSize: 16,
+    fontWeight: '600',
+    flex:1,
+  }
 
 })
