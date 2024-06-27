@@ -1,17 +1,32 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
 import {Drawer} from 'expo-router/drawer'
 import React from 'react'
 import { Link, useNavigation } from 'expo-router'
 import { FontAwesome6, Ionicons } from '@expo/vector-icons'
 import Colors from '@/constants/Colors'
 import { DrawerActions } from '@react-navigation/native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
+
+export const CustomDrawerContent = (props: any) => {
+  const { bottom, top } = useSafeAreaInsets();
+
+  return (
+    <View style={{ flex: 1, marginTop: 16 }}>
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+    </View>
+  )
+}
 
 const Laout = () => {
   const navigation = useNavigation();
-
+  const dimensions = useWindowDimensions();
 
   return (
     <Drawer
+      drawerContent={CustomDrawerContent}
       screenOptions={{
         headerLeft: () => (
           <TouchableOpacity onPress={()=>navigation.dispatch(DrawerActions.toggleDrawer)} style={{marginLeft:16}}>
@@ -20,7 +35,15 @@ const Laout = () => {
         ),
         headerStyle: {
           backgroundColor:Colors.light,
-        }
+        },
+        headerShadowVisible: false,
+        drawerActiveBackgroundColor: Colors.selected,
+        drawerActiveTintColor: '#000', // text on link
+        drawerInactiveTintColor: '#000',
+        drawerItemStyle: { borderRadius: 12 },
+        drawerLabelStyle: { marginLeft: -20 },
+        drawerStyle:{width:dimensions.width*.86},
+        overlayColor:'rgba(0,0,0,0.2)',
       }}
     >
       <Drawer.Screen name='(chat)/new'
