@@ -2,12 +2,24 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import {Drawer} from 'expo-router/drawer'
 import React from 'react'
 import { Link } from 'expo-router'
-import { Ionicons } from '@expo/vector-icons'
+import { FontAwesome6, Ionicons } from '@expo/vector-icons'
 import Colors from '@/constants/Colors'
 
 const Laout = () => {
+  
   return (
-    <Drawer>
+    <Drawer
+      screenOptions={{
+        headerLeft: () => (
+          <TouchableOpacity onPress={()=>{}} style={{marginLeft:16}}>
+            <FontAwesome6 name='grip-lines' size={20} color={Colors.grey} />
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor:Colors.light,
+        }
+      }}
+    >
       <Drawer.Screen name='(chat)/new'
         getId={()=>Math.random().toString()}
         options={{
