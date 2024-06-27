@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from 'react-native'
 import {Drawer} from 'expo-router/drawer'
 import React from 'react'
 import { Link, useNavigation } from 'expo-router'
@@ -12,8 +12,16 @@ export const CustomDrawerContent = (props: any) => {
   const { bottom, top } = useSafeAreaInsets();
 
   return (
-    <View style={{ flex: 1, marginTop: 16 }}>
-      <DrawerContentScrollView {...props}>
+    <View style={{ flex: 1, marginTop: top }}>
+      <View style={{ backgroundColor: '#fff', paddingBottom: 16 }}>
+        <View style={styles.searchSection}>
+            <Ionicons style={styles.searchIcon} name='search' size={18} color={Colors.greyLight}/>
+            <TextInput style={styles.input} placeholder='Search' underlineColorAndroid={'transparent'}/>
+        </View>
+      </View>
+      <DrawerContentScrollView
+        contentContainerStyle={{paddingTop:0,paddingBottom:16}}
+        {...props}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
     </View>
@@ -110,5 +118,26 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     resizeMode:'cover'
-  }
+  },
+  searchSection: {
+    marginHorizontal: 16,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.input,
+    borderRadius: 10,
+    height:34
+  },
+  searchIcon: {
+    padding:6
+  },
+  input: {
+    flex: 1,
+    paddingRight: 8,
+    paddingHorizontal: 8,
+    paddingLeft: 0,
+    alignItems: 'center',
+    color:'#424242'
+  },
+
 })
