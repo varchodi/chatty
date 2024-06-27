@@ -27,7 +27,7 @@ const Laout = () => {
         )
         
         }} />
-      
+      {/* dallE */}
       <Drawer.Screen name='dalle'
         options={{
         title: 'Dall•E',
@@ -35,6 +35,18 @@ const Laout = () => {
         drawerIcon: () => (
           <View style={[styles.item,{backgroundColor:'#000'}]}>
             <Image source={require('@/assets/images/dalle.png')} style={styles.dallEImage} />
+          </View>
+        )
+        
+        }} />
+      
+      <Drawer.Screen name='explore'
+        options={{
+        title: 'Explore GPTs',
+        headerTitleAlign: 'center',
+        drawerIcon: () => (
+          <View style={[styles.itemExplore]}>
+            <Ionicons name='apps-outline' size={18} color={'#000'} />
           </View>
         )
         
@@ -50,6 +62,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     overflow:'hidden'
   },
+  itemExplore: {backgroundColor:'#fff', width:28, height:28, alignItems:'center', justifyContent:'center', borderRadius:15},
   btnImage: {
     margin: 6,
     width: 16,
