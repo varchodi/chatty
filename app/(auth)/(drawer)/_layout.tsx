@@ -1,17 +1,20 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import {Drawer} from 'expo-router/drawer'
 import React from 'react'
-import { Link } from 'expo-router'
+import { Link, useNavigation } from 'expo-router'
 import { FontAwesome6, Ionicons } from '@expo/vector-icons'
 import Colors from '@/constants/Colors'
+import { DrawerActions } from '@react-navigation/native'
 
 const Laout = () => {
-  
+  const navigation = useNavigation();
+
+
   return (
     <Drawer
       screenOptions={{
         headerLeft: () => (
-          <TouchableOpacity onPress={()=>{}} style={{marginLeft:16}}>
+          <TouchableOpacity onPress={()=>navigation.dispatch(DrawerActions.toggleDrawer)} style={{marginLeft:16}}>
             <FontAwesome6 name='grip-lines' size={20} color={Colors.grey} />
           </TouchableOpacity>
         ),
