@@ -25,7 +25,7 @@ const Page = () => {
         }}
       />
       <View style={{ flex: 1 }}>
-        <Text>Dummy Contents</Text>
+        <Text>DUMMY CONTENTS</Text>
       <Button title='sign out' onPress={()=>signOut()}/>
       </View>
       <MessageInput/>
@@ -35,4 +35,4 @@ const Page = () => {
 
 export default Page
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
